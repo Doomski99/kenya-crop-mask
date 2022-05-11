@@ -118,7 +118,6 @@ class UnrolledLSTMCell(nn.Module):
 
         if self.batch_first:
             hidden, cell = torch.transpose(hidden, 0, 1), torch.transpose(cell, 0, 1)
-
         forget_state = self.forget_gate(torch.cat((x, hidden), dim=-1))
         update_state = self.update_gate(torch.cat((x, hidden), dim=-1))
         cell_candidates = self.update_candidates(torch.cat((x, hidden), dim=-1))

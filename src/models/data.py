@@ -317,7 +317,7 @@ class CropDataset(Dataset):
         x = self.remove_bands(x=self._normalize(target_datainstance.labelled_array))
 
         return (
-            torch.from_numpy(x).float(),
-            torch.tensor(crop_int).float(),
-            torch.tensor(is_global).float(),
+            torch.from_numpy(x).float().cuda(),
+            torch.tensor(crop_int).float().cuda(),
+            torch.tensor(is_global).float().cuda(),
         )

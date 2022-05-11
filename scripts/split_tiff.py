@@ -57,8 +57,8 @@ def writeImageAsGeoTIFF(img, transform, metadata, crs, filename, output_folder):
 
 if __name__ == "__main__":
 
-    images = Path("PATH_TO_TIF_FILES").glob("*.tif")
-    output_folder = Path("PATH_TO_SAVE_FOLDER")
+    images = Path("data//test").glob("*.tif")
+    output_folder = Path("data//test")
     for idx, image in enumerate(images):
 
         print(f"Splitting {image}")

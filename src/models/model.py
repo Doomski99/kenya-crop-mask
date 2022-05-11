@@ -135,7 +135,7 @@ class Model(pl.LightningModule):
         with_forecaster: bool,
         batch_size: int = 64,
         add_ndvi: bool = True,
-        add_ndwi: bool = False,
+        add_ndwi: bool = True,
         nan_fill: float = 0,
         days_per_timestep: int = 30,
         local_head: bool = True,
@@ -244,7 +244,7 @@ class Model(pl.LightningModule):
         # the added noise is the same per band, so that the temporal relationships
         # are preserved
         # noise_per_timesteps = noise.repeat(x.shape[0], 1)
-        return x + noise
+        return x + noise.cuda()
 
     def _split_preds_and_get_loss(
         self, batch, add_preds: bool, loss_label: str, log_loss: bool, training: bool
@@ -333,7 +333,8 @@ class Model(pl.LightningModule):
 
             loss += self.global_loss_function(input=preds.squeeze(-1), target=label,)
 
-            output_dict = {loss_label: loss}
+            #output_dict = {loss_label: loss}
+            output_dict[loss_label] = loss
             if log_loss:
                 output_dict["log"][loss_label] = loss
             if add_preds:
@@ -463,10 +464,10 @@ class Model(pl.LightningModule):
 
         parser_args: Dict[str, Tuple[Type, Any]] = {
             # assumes this is being run from "scripts"
-            "--data_folder": (str, str(Path("../data"))),
+            "--data_folder": (str, str(Path("data"))),
             "--learning_rate": (float, 0.001),
             "--batch_size": (int, 64),
-            "--input_months": (int, 5),
+            "--input_months": (int, 12),
             "--alpha": (float, 10),
             "--noise_factor": (float, 0.1),
         }
@@ -480,7 +481,7 @@ class Model(pl.LightningModule):
 
         parser.add_argument("--forecast", dest="forecast", action="store_true")
         parser.add_argument("--do_not_forecast", dest="forecast", action="store_false")
-        parser.set_defaults(forecast=True)
+        parser.set_defaults(forecast=False)
 
         parser.add_argument("--cache", dest="cache", action="store_true")
         parser.add_argument("--do_not_cache", dest="cache", action="store_false")

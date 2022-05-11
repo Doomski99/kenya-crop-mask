@@ -1,5 +1,5 @@
 # Created by https://www.gitignore.io/api/python,osx,pycharm
-
+#Edit by ali k
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -188,3 +188,7 @@ files
 # the data folder
 data
 scripts/lightning_logs
+lightning_logs
+mask.tif
+METRICS.txt
+test.ipynb

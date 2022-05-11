@@ -38,7 +38,6 @@ def plot_results(model_preds: xr.Dataset, tci_path: Path, savepath: Path, prefix
 
     tci = tci.sortby("x").sortby("y")
     model_preds = model_preds.sortby("lat").sortby("lon")
-
     plt.clf()
     fig, ax = plt.subplots(1, 3, figsize=(20, 7.5), subplot_kw={"projection": ccrs.PlateCarree()})
 

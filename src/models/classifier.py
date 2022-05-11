@@ -118,10 +118,10 @@ class Classifier(pl.LightningModule):
 
         parser_args: Dict[str, Tuple[Type, Any]] = {
             # assumes this is being run from "scripts"
-            "--classifier_vector_size": (int, 128),
+            "--classifier_vector_size": (int, 256),
             "--classifier_base_layers": (int, 1),
             "--classifier_dropout": (float, 0.2),
-            "--num_global_layers": (int, 1),
+            "--num_global_layers": (int, 3),
             "--num_local_layers": (int, 2),
         }
 
@@ -130,6 +130,6 @@ class Classifier(pl.LightningModule):
 
         parser.add_argument("--multi_headed", dest="multi_headed", action="store_true")
         parser.add_argument("--not_multi_headed", dest="multi_headed", action="store_false")
-        parser.set_defaults(multi_headed=True)
+        parser.set_defaults(multi_headed=False)
 
         return parser

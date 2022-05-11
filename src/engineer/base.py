@@ -279,7 +279,7 @@ class BaseEngineer(ABC):
         max_nan_ratio: float = 0.3,
         checkpoint: bool = True,
         add_ndvi: bool = True,
-        add_ndwi: bool = False,
+        add_ndwi: bool = True,
         include_extended_filenames: bool = True,
         calculate_normalizing_dict: bool = True,
         days_per_timestep: int = 30,
