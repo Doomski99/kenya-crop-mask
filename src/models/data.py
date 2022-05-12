@@ -315,9 +315,10 @@ class CropDataset(Dataset):
         is_global = 1 if target_datainstance.dataset == GeoWikiProcessor.dataset else 0
 
         x = self.remove_bands(x=self._normalize(target_datainstance.labelled_array))
-
+        use_cuda = torch.cuda.is_available()
+        device = torch.device("cuda" if use_cuda else "cpu")
         return (
-            torch.from_numpy(x).float().cuda(),
-            torch.tensor(crop_int).float().cuda(),
-            torch.tensor(is_global).float().cuda(),
+            torch.from_numpy(x).float().to(device),
+            torch.tensor(crop_int).float().to(device),
+            torch.tensor(is_global).float().to(device),
         )
