@@ -38,7 +38,7 @@ def kenya_crop_type_mapper():
         out_normal = model.predict(test_path, with_forecaster=False)
         mask = out_normal.prediction_0.rename({'lon':'x','lat':'y'})
         mask.rio.to_raster(os.path.join(save_dir,test_path.name.split('.')[0]+'_mask.tif'), compress='deflate', num_threads='all_cpus', driver="GTIFF")
-        plot_results(out_normal, test_path, savepath=save_dir, prefix="full_input_")
+        #plot_results(out_normal, test_path, savepath=save_dir, prefix="full_input_")
 
         # out_forecasted.to_netcdf(save_dir / f"preds_forecasted_{test_path.name}.nc")
         # out_normal.to_netcdf(save_dir / f"preds_normal_{test_path.name}.nc")
