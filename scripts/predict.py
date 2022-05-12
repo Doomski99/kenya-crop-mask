@@ -11,11 +11,11 @@ from src.analysis import plot_results
 def kenya_crop_type_mapper():
     data_dir = "data"
 
-    test_folder = Path("data\\test")
+    test_folder = Path("data//test")
     test_files = test_folder.glob("*.tif")
     print(test_files)
 
-    model_path = "data\\lightning_logs\\version_10\\checkpoints\\epoch=60.ckpt"
+    model_path = "data//lightning_logs//version_10//checkpoints//epoch=60.ckpt"
     print(f"Using model {model_path}")
 
     model = Model.load_from_checkpoint(model_path)
